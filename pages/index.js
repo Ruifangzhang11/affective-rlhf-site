@@ -71,14 +71,6 @@ export default function AffectiveRLHFHome() {
         </ResponsiveContainer>
       </section>
 
-      <section className="p-12 text-center">
-        <h3 className="text-3xl font-bold mb-4">🎥 Product Preview</h3>
-        <video controls className="mx-auto w-full max-w-4xl rounded-xl shadow-lg">
-          <source src="/demo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </section>
-
       <section className="p-12 bg-gray-950">
         <h3 className="text-3xl font-bold text-center mb-6">📈 Use Cases</h3>
         <div className="grid md:grid-cols-3 gap-6">
