@@ -13,19 +13,34 @@ const chartData = [
 ];
 
 const performanceData = [
-  { month: "Jan", Traditional: 65, AffectiveRLHF: 85 },
-  { month: "Feb", Traditional: 68, AffectiveRLHF: 88 },
-  { month: "Mar", Traditional: 72, AffectiveRLHF: 92 },
-  { month: "Apr", Traditional: 75, AffectiveRLHF: 94 },
-  { month: "May", Traditional: 78, AffectiveRLHF: 96 },
-  { month: "Jun", Traditional: 80, AffectiveRLHF: 98 },
+  { month: "Jan", Traditional: 65, PhysioRLHF: 85 },
+  { month: "Feb", Traditional: 68, PhysioRLHF: 88 },
+  { month: "Mar", Traditional: 72, PhysioRLHF: 92 },
+  { month: "Apr", Traditional: 75, PhysioRLHF: 94 },
+  { month: "May", Traditional: 78, PhysioRLHF: 96 },
+  { month: "Jun", Traditional: 80, PhysioRLHF: 98 },
 ];
 
 const signalData = [
-  { name: "EEG", value: 35, color: "#4ade80" },
-  { name: "EMG", value: 25, color: "#f87171" },
-  { name: "HRV", value: 20, color: "#60a5fa" },
-  { name: "Facial", value: 20, color: "#a78bfa" },
+  { name: "Heart Rate", value: 40, color: "#ef4444" },
+  { name: "HRV", value: 25, color: "#60a5fa" },
+  { name: "Activity", value: 20, color: "#4ade80" },
+  { name: "Sleep", value: 15, color: "#a78bfa" },
+];
+
+const heartRateData = [
+  { time: "00:00", bpm: 65 },
+  { time: "02:00", bpm: 58 },
+  { time: "04:00", bpm: 55 },
+  { time: "06:00", bpm: 70 },
+  { time: "08:00", bpm: 85 },
+  { time: "10:00", bpm: 92 },
+  { time: "12:00", bpm: 88 },
+  { time: "14:00", bpm: 95 },
+  { time: "16:00", bpm: 78 },
+  { time: "18:00", bpm: 82 },
+  { time: "20:00", bpm: 75 },
+  { time: "22:00", bpm: 68 },
 ];
 
 const teamMembers = [
@@ -56,17 +71,44 @@ const teamMembers = [
 ];
 
 const technologies = [
-  { name: "PyTorch", icon: "🔥", description: "Deep Learning Framework" },
-  { name: "TensorFlow", icon: "⚡", description: "ML Infrastructure" },
-  { name: "OpenBCI", icon: "🧠", description: "EEG Hardware" },
-  { name: "OpenCV", icon: "👁️", description: "Computer Vision" },
-  { name: "Scikit-learn", icon: "📊", description: "ML Algorithms" },
-  { name: "React", icon: "⚛️", description: "Frontend Framework" }
+  { name: "SwiftUI", icon: "📱", description: "iOS Development" },
+  { name: "HealthKit", icon: "❤️", description: "Health Data" },
+  { name: "WatchKit", icon: "⌚", description: "Apple Watch" },
+  { name: "WatchConnectivity", icon: "🔗", description: "Device Sync" },
+  { name: "Supabase", icon: "☁️", description: "Backend" },
+  { name: "React", icon: "⚛️", description: "Web Frontend" }
+];
+
+const features = [
+  {
+    title: "Real-time Heart Rate Monitoring",
+    description: "Continuous heart rate data collection from Apple Watch with millisecond precision",
+    icon: "❤️",
+    details: ["Live BPM tracking", "HRV analysis", "Activity correlation", "Sleep insights"]
+  },
+  {
+    title: "Cross-device Synchronization",
+    description: "Seamless communication between iPhone and Apple Watch using WatchConnectivity",
+    icon: "🔗",
+    details: ["Real-time data sync", "Automatic pairing", "Connection monitoring", "Offline support"]
+  },
+  {
+    title: "HealthKit Integration",
+    description: "Native integration with Apple's health ecosystem for comprehensive data access",
+    icon: "🏥",
+    details: ["Health data access", "Privacy compliance", "Data persistence", "Background sync"]
+  },
+  {
+    title: "AI Training Integration",
+    description: "Physiological feedback for AI model optimization and reinforcement learning",
+    icon: "🧠",
+    details: ["Real-time feedback", "Model optimization", "Progress tracking", "Performance analytics"]
+  }
 ];
 
 export default function AffectiveRLHFHome() {
   useEffect(() => {
-    document.title = "Affective RLHF | Next-Gen Human Feedback";
+    document.title = "PhysioRLHF | Physiological Reinforcement Learning";
   }, []);
 
   return (
@@ -74,38 +116,72 @@ export default function AffectiveRLHFHome() {
       {/* Navigation */}
       <header className="p-6 flex justify-between items-center border-b border-gray-700">
         <div className="flex items-center space-x-4">
-          <h1 className="text-3xl font-bold tracking-tight">Affective RLHF</h1>
-          <span className="text-sm bg-blue-600 px-2 py-1 rounded">v2.1</span>
+          <h1 className="text-3xl font-bold tracking-tight">PhysioRLHF</h1>
+          <span className="text-sm bg-red-600 px-2 py-1 rounded">v2.1</span>
         </div>
         <nav className="hidden md:flex space-x-6">
-          <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
-          <a href="#technology" className="hover:text-blue-400 transition-colors">Technology</a>
-          <a href="#team" className="hover:text-blue-400 transition-colors">Team</a>
-          <a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a>
+          <a href="#about" className="hover:text-red-400 transition-colors">About</a>
+          <a href="#features" className="hover:text-red-400 transition-colors">Features</a>
+          <a href="#technology" className="hover:text-red-400 transition-colors">Technology</a>
+          <a href="#team" className="hover:text-red-400 transition-colors">Team</a>
+          <a href="#contact" className="hover:text-red-400 transition-colors">Contact</a>
         </nav>
-        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black transition-all">Request Demo</Button>
+        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black transition-all">Download App</Button>
       </header>
 
       {/* Hero Section */}
       <section className="p-12 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-purple-600/10"></div>
         <div className="relative z-10">
           <motion.h2 
             initial={{ opacity: 0, y: 50 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8 }} 
-            className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+            className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-red-400 to-purple-400 bg-clip-text text-transparent"
           >
-            Reinventing Human Feedback with Biometric Signals
+            Physiological Reinforcement Learning from Human Feedback
           </motion.h2>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-            We bridge the gap between human preference and machine learning with real-time affective signals: 
-            EEG, EMG, HRV, and facial micro-expressions. Our approach enables scalable, accurate, and implicit 
-            feedback for training reward models.
+            Revolutionizing AI training with real-time physiological signals from Apple Watch. 
+            Our iOS application collects heart rate data to provide authentic, continuous feedback 
+            for reinforcement learning models, enabling more natural and responsive AI systems.
           </p>
           <div className="flex justify-center space-x-4">
-            <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg">Get Started</Button>
+            <Button className="bg-red-600 hover:bg-red-700 px-8 py-3 text-lg">Download for iOS</Button>
             <Button variant="outline" className="px-8 py-3 text-lg">Watch Demo</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section id="features" className="p-12">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-4xl font-bold text-center mb-12">🚀 Key Features</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="h-full">
+                  <CardContent className="p-8">
+                    <div className="text-4xl mb-4">{feature.icon}</div>
+                    <h4 className="text-2xl font-semibold mb-4">{feature.title}</h4>
+                    <p className="text-gray-300 mb-6 leading-relaxed">{feature.description}</p>
+                    <ul className="space-y-2">
+                      {feature.details.map((detail, idx) => (
+                        <li key={idx} className="text-sm text-gray-400 flex items-center">
+                          <span className="text-red-400 mr-2">•</span>
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -118,14 +194,14 @@ export default function AffectiveRLHFHome() {
               <div className="text-4xl mb-4">💡</div>
               <h3 className="text-2xl font-semibold mb-4">The Problem</h3>
               <p className="text-gray-300 leading-relaxed">
-                Human-labeled preference data is time-consuming, expensive, and often noisy. Traditional RLHF 
-                pipelines rely heavily on manual ranking, which doesn't scale. Current methods suffer from:
+                Traditional RLHF relies on manual preference rankings that are subjective, 
+                time-consuming, and don't capture real-time emotional responses. Current methods lack:
               </p>
               <ul className="mt-4 space-y-2 text-sm text-gray-400">
-                <li>• High annotation costs ($50-200 per hour)</li>
-                <li>• Subjective human judgments</li>
-                <li>• Limited scalability</li>
-                <li>• Inconsistent feedback quality</li>
+                <li>• Real-time physiological feedback</li>
+                <li>• Continuous data collection</li>
+                <li>• Objective biometric measurements</li>
+                <li>• Natural user interaction</li>
               </ul>
             </CardContent>
           </Card>
@@ -134,17 +210,17 @@ export default function AffectiveRLHFHome() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <Card className="h-full">
             <CardContent className="p-8">
-              <div className="text-4xl mb-4">🧠</div>
+              <div className="text-4xl mb-4">❤️</div>
               <h3 className="text-2xl font-semibold mb-4">Our Solution</h3>
               <p className="text-gray-300 leading-relaxed">
-                We use multimodal biosignals collected during the annotation process to infer implicit feedback 
-                and emotional reactions—enabling faster, more authentic training data.
+                Apple Watch-powered physiological monitoring that provides continuous, 
+                real-time heart rate data as feedback signals for AI model training.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-gray-400">
-                <li>• Real-time physiological monitoring</li>
-                <li>• Objective biometric measurements</li>
-                <li>• Scalable data collection</li>
-                <li>• Consistent feedback signals</li>
+                <li>• Live heart rate monitoring</li>
+                <li>• WatchConnectivity integration</li>
+                <li>• HealthKit data access</li>
+                <li>• Seamless user experience</li>
               </ul>
             </CardContent>
           </Card>
@@ -156,61 +232,116 @@ export default function AffectiveRLHFHome() {
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-2xl font-semibold mb-4">The Impact</h3>
               <p className="text-gray-300 leading-relaxed">
-                Reduced annotation cost, faster iteration cycles, and more robust reward models with real-time 
-                physiological feedback as supervision signals.
+                More authentic AI training with physiological feedback, enabling models 
+                that respond to real human emotions and reactions.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-gray-400">
-                <li>• 70% cost reduction</li>
-                <li>• 5x faster iteration</li>
-                <li>• 25% accuracy improvement</li>
-                <li>• Unlimited scalability</li>
+                <li>• Authentic emotional feedback</li>
+                <li>• Continuous data collection</li>
+                <li>• Natural user interaction</li>
+                <li>• Improved model performance</li>
               </ul>
             </CardContent>
           </Card>
         </motion.div>
       </section>
 
-      {/* Technology Overview */}
-      <section id="technology" className="p-12 bg-gray-900">
+      {/* Real-time Heart Rate Demo */}
+      <section className="p-12 bg-gray-900">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-4xl font-bold mb-8 text-center">🔬 Technology Stack</h3>
+          <h3 className="text-4xl font-bold mb-8 text-center">❤️ Real-time Heart Rate Monitoring</h3>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h4 className="text-2xl font-semibold mb-6">Biometric Signal Processing</h4>
+              <h4 className="text-2xl font-semibold mb-6">Live Physiological Data</h4>
               <div className="space-y-4">
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">⌚</div>
+                  <div>
+                    <h5 className="font-semibold">Apple Watch Integration</h5>
+                    <p className="text-sm text-gray-400">Continuous heart rate monitoring with millisecond precision</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">📱</div>
+                  <div>
+                    <h5 className="font-semibold">iPhone Synchronization</h5>
+                    <p className="text-sm text-gray-400">Real-time data transmission via WatchConnectivity</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">🏥</div>
+                  <div>
+                    <h5 className="font-semibold">HealthKit Integration</h5>
+                    <p className="text-sm text-gray-400">Secure health data storage and access</p>
+                  </div>
+                </div>
                 <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
                   <div className="text-2xl">🧠</div>
                   <div>
-                    <h5 className="font-semibold">EEG (Electroencephalography)</h5>
-                    <p className="text-sm text-gray-400">Brain wave patterns for cognitive load and attention</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
-                  <div className="text-2xl">💪</div>
-                  <div>
-                    <h5 className="font-semibold">EMG (Electromyography)</h5>
-                    <p className="text-sm text-gray-400">Muscle activity for stress and engagement levels</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
-                  <div className="text-2xl">❤️</div>
-                  <div>
-                    <h5 className="font-semibold">HRV (Heart Rate Variability)</h5>
-                    <p className="text-sm text-gray-400">Autonomic nervous system responses</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
-                  <div className="text-2xl">👁️</div>
-                  <div>
-                    <h5 className="font-semibold">Facial Micro-expressions</h5>
-                    <p className="text-sm text-gray-400">Subtle emotional responses and reactions</p>
+                    <h5 className="font-semibold">AI Training Feedback</h5>
+                    <p className="text-sm text-gray-400">Physiological signals for model optimization</p>
                   </div>
                 </div>
               </div>
             </div>
             <div>
               <div className="bg-gray-800 p-6 rounded-lg">
-                <h5 className="text-lg font-semibold mb-4">Signal Distribution</h5>
+                <h5 className="text-lg font-semibold mb-4">24-Hour Heart Rate Pattern</h5>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={heartRateData} margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis dataKey="time" stroke="#ccc" />
+                    <YAxis stroke="#ccc" />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="bpm" stroke="#ef4444" strokeWidth={3} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Overview */}
+      <section id="technology" className="p-12">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-4xl font-bold mb-8 text-center">🔬 Technology Stack</h3>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h4 className="text-2xl font-semibold mb-6">iOS & Apple Watch Development</h4>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">📱</div>
+                  <div>
+                    <h5 className="font-semibold">SwiftUI & UIKit</h5>
+                    <p className="text-sm text-gray-400">Modern iOS development with declarative UI</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">⌚</div>
+                  <div>
+                    <h5 className="font-semibold">WatchKit & watchOS</h5>
+                    <p className="text-sm text-gray-400">Apple Watch app development and heart rate monitoring</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">🔗</div>
+                  <div>
+                    <h5 className="font-semibold">WatchConnectivity</h5>
+                    <p className="text-sm text-gray-400">Real-time communication between iPhone and Apple Watch</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg">
+                  <div className="text-2xl">🏥</div>
+                  <div>
+                    <h5 className="font-semibold">HealthKit Framework</h5>
+                    <p className="text-sm text-gray-400">Health data access and privacy management</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h5 className="text-lg font-semibold mb-4">Data Sources Distribution</h5>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie
@@ -235,18 +366,18 @@ export default function AffectiveRLHFHome() {
       </section>
 
       {/* Benchmark Comparison */}
-      <section className="p-12">
+      <section className="p-12 bg-gray-950">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl font-bold mb-8 text-center">⚖️ Performance Benchmark</h3>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h4 className="text-2xl font-semibold mb-6">Traditional vs Affective RLHF</h4>
+              <h4 className="text-2xl font-semibold mb-6">Traditional vs PhysioRLHF</h4>
               <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={chartData} margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
                   <XAxis dataKey="name" stroke="#ccc" />
                   <YAxis stroke="#ccc" />
                   <Tooltip />
-                  <Bar dataKey="Research" fill="#4ade80" name="Affective RLHF" />
+                  <Bar dataKey="Research" fill="#ef4444" name="PhysioRLHF" />
                   <Bar dataKey="Traditional" fill="#f87171" name="Traditional RLHF" />
                 </BarChart>
               </ResponsiveContainer>
@@ -258,7 +389,7 @@ export default function AffectiveRLHFHome() {
                   <XAxis dataKey="month" stroke="#ccc" />
                   <YAxis stroke="#ccc" />
                   <Tooltip />
-                  <Line type="monotone" dataKey="AffectiveRLHF" stroke="#4ade80" strokeWidth={3} />
+                  <Line type="monotone" dataKey="PhysioRLHF" stroke="#ef4444" strokeWidth={3} />
                   <Line type="monotone" dataKey="Traditional" stroke="#f87171" strokeWidth={3} />
                 </LineChart>
               </ResponsiveContainer>
@@ -268,22 +399,22 @@ export default function AffectiveRLHFHome() {
       </section>
 
       {/* Use Cases */}
-      <section className="p-12 bg-gray-950">
+      <section className="p-12 bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl font-bold text-center mb-12">📈 Applications & Use Cases</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <Card>
               <CardContent className="p-8">
                 <div className="text-3xl mb-4">🔍</div>
-                <h4 className="text-xl font-semibold mb-4">LLM Fine-tuning</h4>
+                <h4 className="text-xl font-semibold mb-4">AI Model Training</h4>
                 <p className="text-gray-300 mb-4">
-                  Fine-tuning large language models with minimal manual preference data, 
-                  using real-time emotional responses to guide model optimization.
+                  Train AI models with real-time physiological feedback from users' 
+                  heart rate responses during interaction.
                 </p>
                 <ul className="text-sm text-gray-400 space-y-1">
-                  <li>• GPT-4 optimization</li>
-                  <li>• Claude fine-tuning</li>
-                  <li>• Custom model training</li>
+                  <li>• Real-time feedback loops</li>
+                  <li>• Physiological reward signals</li>
+                  <li>• Continuous model optimization</li>
                 </ul>
               </CardContent>
             </Card>
@@ -292,13 +423,13 @@ export default function AffectiveRLHFHome() {
                 <div className="text-3xl mb-4">🎮</div>
                 <h4 className="text-xl font-semibold mb-4">Gaming & Entertainment</h4>
                 <p className="text-gray-300 mb-4">
-                  Adaptive game mechanics using players' real-time emotions to create 
-                  personalized and engaging experiences.
+                  Adaptive experiences that respond to players' real-time heart rate 
+                  and emotional states.
                 </p>
                 <ul className="text-sm text-gray-400 space-y-1">
                   <li>• Dynamic difficulty adjustment</li>
                   <li>• Emotional storytelling</li>
-                  <li>• VR/AR experiences</li>
+                  <li>• Immersive experiences</li>
                 </ul>
               </CardContent>
             </Card>
@@ -307,13 +438,13 @@ export default function AffectiveRLHFHome() {
                 <div className="text-3xl mb-4">🧪</div>
                 <h4 className="text-xl font-semibold mb-4">Research & Development</h4>
                 <p className="text-gray-300 mb-4">
-                  Cognitive research and stimulus-response experiments with precise 
-                  physiological measurements.
+                  Cognitive research and human-computer interaction studies with 
+                  precise physiological measurements.
                 </p>
                 <ul className="text-sm text-gray-400 space-y-1">
                   <li>• Psychology studies</li>
                   <li>• UX research</li>
-                  <li>• Clinical trials</li>
+                  <li>• Clinical applications</li>
                 </ul>
               </CardContent>
             </Card>
@@ -322,7 +453,7 @@ export default function AffectiveRLHFHome() {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="p-12 bg-gray-900">
+      <section id="team" className="p-12">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl font-bold text-center mb-12">👥 Our Team</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -341,7 +472,7 @@ export default function AffectiveRLHFHome() {
                       className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
                     />
                     <h4 className="font-semibold text-lg">{member.name}</h4>
-                    <p className="text-blue-400 text-sm mb-2">{member.role}</p>
+                    <p className="text-red-400 text-sm mb-2">{member.role}</p>
                     <p className="text-gray-400 text-xs">{member.expertise}</p>
                   </CardContent>
                 </Card>
@@ -352,7 +483,7 @@ export default function AffectiveRLHFHome() {
       </section>
 
       {/* Technologies Used */}
-      <section className="p-12">
+      <section className="p-12 bg-gray-950">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl font-bold text-center mb-12">🛠️ Technologies We Use</h3>
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -377,20 +508,20 @@ export default function AffectiveRLHFHome() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="p-12 bg-gray-950">
+      <section id="contact" className="p-12 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-4xl font-bold mb-8">🚀 Ready to Get Started?</h3>
           <p className="text-xl text-gray-300 mb-8">
-            Join the future of human-AI interaction with affective computing technology.
+            Experience the future of physiological AI training with Apple Watch integration.
           </p>
           <div className="flex justify-center space-x-4">
-            <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg">Request Demo</Button>
+            <Button className="bg-red-600 hover:bg-red-700 px-8 py-3 text-lg">Download App</Button>
             <Button variant="outline" className="px-8 py-3 text-lg">Contact Sales</Button>
           </div>
           <div className="mt-8 grid md:grid-cols-3 gap-8 text-sm">
             <div>
               <h4 className="font-semibold mb-2">📧 Email</h4>
-              <p className="text-gray-400">hello@affectiverlhf.ai</p>
+              <p className="text-gray-400">hello@physiorlhf.ai</p>
             </div>
             <div>
               <h4 className="font-semibold mb-2">📱 Phone</h4>
@@ -409,16 +540,16 @@ export default function AffectiveRLHFHome() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="font-semibold mb-4">Affective RLHF</h4>
+              <h4 className="font-semibold mb-4">PhysioRLHF</h4>
               <p className="text-gray-400 text-sm">
-                Pioneering the future of human-AI interaction through biometric signal processing.
+                Pioneering physiological reinforcement learning with Apple Watch integration.
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="text-gray-400 text-sm space-y-2">
-                <li>Features</li>
-                <li>Pricing</li>
+                <li>iOS App</li>
+                <li>Apple Watch App</li>
                 <li>Documentation</li>
                 <li>API Reference</li>
               </ul>
@@ -443,7 +574,7 @@ export default function AffectiveRLHFHome() {
             </div>
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
-            © 2025 AffectiveRLHF.ai — Built with ❤️ for the next generation of AI.
+            © 2025 PhysioRLHF.ai — Built with ❤️ for the next generation of AI.
           </div>
         </div>
       </footer>
